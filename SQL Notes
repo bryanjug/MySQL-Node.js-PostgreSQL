@@ -1,0 +1,1352 @@
+
+Data definition language (DDL)
+Create table
+Drop table
+Data manipulation language(DML)
+Select
+Insert
+Delete
+Update
+Basic SELECT Statement
+Select - A1, A2,..., An ←- what to return (3)
+From - R1, R2,..., Rm ←- relations (1)
+Where - condition ←- combine filter (2)
+college(cName,state,enrollment)
+student(sID,sName,GPA,sizeHS)
+apply(sID,cName,major,decision)
+
+CREATE TABLE groceries (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER);
+INSERT INTO groceries VALUES (1, "Bananas", 4);
+INSERT INTO groceries VALUES (2, "Peanut Butter", 1);
+INSERT INTO groceries VALUES (3, "Dark chocolate bars", 2);
+SELECT * FROM groceries;
+SELECT * FROM groceries; //displays info
+
+
+id
+name
+quantity
+1
+Bananas
+4
+2
+Peanut Butter
+1
+3
+Dark chocolate bars
+2
+
+id
+name
+quantity
+1
+Bananas
+4
+2
+Peanut Butter
+1
+3
+Dark chocolate bars
+2
+
+><
+CREATE TABLE groceries (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, aisle INTEGER);
+INSERT INTO groceries VALUES (1, "Bananas", 4, 7);
+INSERT INTO groceries VALUES (2, "Peanut Butter", 1, 2);
+INSERT INTO groceries VALUES (3, "Dark chocolate bars", 2, 2);
+INSERT INTO groceries VALUES (4, "Ice Cream", 1, 12);
+INSERT INTO groceries VALUES (5, "Cherries", 6, 2);
+INSERT INTO groceries VALUES (6, "Chocolate Syrup", 1, 4);
+
+SELECT * FROM groceries WHERE aisle > 5 ORDER BY aisle; //displays data set ordered by aisle numbers from least to greatest
+
+id
+name
+quantity
+aisle
+1
+Bananas
+4
+7
+4
+Ice cream
+1
+12
+
+CREATE TABLE movies (id INTEGER PRIMARY KEY, name TEXT, release_year INTEGER);
+INSERT INTO movies VALUES (1, "Avatar", 2009);
+INSERT INTO movies VALUES (2, "Titanic", 1997);
+INSERT INTO movies VALUES (3, "Star Wars: Episode IV - A New Hope", 1977);
+INSERT INTO movies VALUES (4, "Shrek 2", 2004);
+INSERT INTO movies VALUES (5, "The Lion King", 1994);
+INSERT INTO movies VALUES (6, "Disney's Up", 2009);
+SELECT * FROM movies;
+SELECT * FROM movies WHERE release_year > 2000 ORDER BY release_year;
+
+SELECT * FROM movies WHERE release_year = 2000 ORDER BY release_year;
+
+id
+name
+release_year
+1
+Avatar
+2009
+2
+Titanic
+1997
+3
+Star Wars: Episode IV - A New Hope
+1977
+4
+Shrek 2
+2004
+5
+The Lion King
+1994
+6
+Disney's Up
+2009
+
+id
+name
+release_year
+4
+Shrek 2
+2004
+1
+Avatar
+2009
+6
+Disney's Up
+2009
+
+><
+CREATE TABLE groceries (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, aisle INTEGER);
+INSERT INTO groceries VALUES (1, "Bananas", 4, 7);
+INSERT INTO groceries VALUES (2, "Peanut Butter", 1, 2);
+INSERT INTO groceries VALUES (3, "Dark chocolate bars", 2, 2);
+INSERT INTO groceries VALUES (4, "Ice Cream", 1, 12);
+INSERT INTO groceries VALUES (5, "Cherries", 6, 2);
+INSERT INTO groceries VALUES (6, "Chocolate Syrup", 1, 4);
+
+SELECT MAX(quantity) FROM groceries; //dont need, just showing you can use max
+SELECT aisle, SUM(quantity) FROM groceries GROUP BY aisle;
+
+aisle
+SUM(quantity)
+2
+9
+4
+1
+7
+56
+12
+1
+
+CREATE TABLE todo_list (id INTEGER PRIMARY KEY, item TEXT, minutes INTEGER);
+INSERT INTO todo_list VALUES (1, "Wash the dishes", 15);
+INSERT INTO todo_list VALUES (2, "vacuuming", 20);
+INSERT INTO todo_list VALUES (3, "Learn some stuff on KA", 30);
+INSERT INTO todo_list VALUES (4, "Play some VRchat", 60);
+
+SELECT SUM(minutes) FROM todo_list;
+
+SUM(minutes)
+125
+
+CREATE TABLE donations (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, superdonor TEXT, extremedonor TEXT, used TEXT);
+INSERT INTO donations VALUES (1, "Abyssal Whip", 5, "N", "N", "Y");
+INSERT INTO donations VALUES (2, "3rd Age Platebody", 25, "Y", "N", "Y");
+INSERT INTO donations VALUES (3, "Titan Whip", 100, "Y", "Y", "N");
+INSERT INTO donations VALUES (4, "3rd Age Platelegs", 25, "Y", "N", "Y");
+INSERT INTO donations VALUES (5, "Dragon Defender", 5, "N", "N", "Y");
+INSERT INTO donations VALUES (6, "Ancient Shield", 5, "N", "N", "N");
+INSERT INTO donations VALUES (7, "Elysian Ancient Shield", 25, "Y", "N", "Y");
+INSERT INTO donations VALUES (8, "Robin Hood Hat", 10, "N", "N", "Y");
+INSERT INTO donations VALUES (9, "White Partyhat", 200, "Y", "Y", "N");
+INSERT INTO donations VALUES (10, "Blue Partyhat", 300, "Y", "Y", "Y");
+INSERT INTO donations VALUES (11, "Dharok's Set", 15, "N", "N", "Y");
+INSERT INTO donations VALUES (12, "Dragon Claws", 30, "Y", "N", "N");
+INSERT INTO donations VALUES (13, "Ancient boots", 75, "Y", "N", "N");
+INSERT INTO donations VALUES (14, "Cloud Cape", 15, "N", "N", "Y");
+INSERT INTO donations VALUES (15, "Christmas Cracker", 95, "Y", "N", "Y");
+
+SELECT item, (price), (superdonor), (extremedonor), (used) FROM donations ORDER BY price;
+
+SELECT MAX(price) FROM donations;
+SELECT SUM(price) FROM donations;
+
+item
+price
+superdonor
+extremedonor
+used
+Abyssal Whip
+5
+N
+N
+Y
+Dragon Defender
+5
+N
+N
+Y
+Ancient Shield
+5
+N
+N
+N
+Robin Hood Hat
+10
+N
+N
+Y
+Dharok's Set
+15
+N
+N
+Y
+Cloud Cape
+15
+N
+N
+Y
+3rd Age Platebody
+25
+Y
+N
+Y
+3rd Age Platelegs
+25
+Y
+N
+Y
+Elysian Ancient Shield
+25
+Y
+N
+Y
+Dragon Claws
+30
+Y
+N
+N
+Ancient boots
+75
+Y
+N
+N
+Christmas Cracker
+95
+Y
+N
+Y
+Titan Whip
+100
+Y
+Y
+N
+White Partyhat
+200
+Y
+Y
+N
+Blue Partyhat
+300
+Y
+Y
+Y
+
+MAX(price)
+300
+
+SUM(price)
+930
+
+CREATE TABLE exercise_logs
+    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT,
+    minutes INTEGER, 
+    calories INTEGER,
+    heart_rate INTEGER);
+
+
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 30, 100, 110);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 10, 30, 105);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("dancing", 15, 200, 120);
+
+SELECT * FROM exercise_logs WHERE calories > 50 ORDER BY calories;
+SELECT * FROM exercise_logs WHERE calories > 50 AND minutes < 30;
+SELECT * FROM exercise_logs WHERE calories > 50 OR heart_rate > 100;
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+100
+110
+3
+dancing
+15
+200
+120
+
+id
+type
+minutes
+calories
+heart_rate
+3
+dancing
+15
+200
+120
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+100
+110
+2
+biking
+10
+30
+105
+3
+dancing
+15
+200
+120
+
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    artist TEXT,
+    mood TEXT,
+    duration INTEGER,
+    released INTEGER);
+    
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("Bohemian Rhapsody", "Queen", "epic", 60, 1975);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("Let it go", "Idina Menzel", "epic", 227, 2013);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("I will survive", "Gloria Gaynor", "epic", 198, 1978);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("Twist and Shout", "The Beatles", "happy", 152, 1963);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("La Bamba", "Ritchie Valens", "happy", 166, 1958);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("I will always love you", "Whitney Houston", "epic", 273, 1992);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("Sweet Caroline", "Neil Diamond", "happy", 201, 1969);
+INSERT INTO songs (title, artist, mood, duration, released)
+    VALUES ("Call me maybe", "Carly Rae Jepsen", "happy", 193, 2011);
+    
+SELECT title FROM songs;
+
+SELECT title FROM songs WHERE mood = "epic" OR released > 1990;
+
+SELECT title FROM songs WHERE mood = "epic" AND released > 1990 AND duration < 240;
+
+title
+Bohemian Rhapsody
+Let it go
+I will survive
+Twist and Shout
+La Bamba
+I will always love you
+Sweet Caroline
+Call me maybe
+
+title
+Bohemian Rhapsody
+Let it go
+I will survive
+I will always love you
+Call me maybe
+
+title
+Let it go
+Querying in subqueries
+CREATE TABLE exercise_logs
+    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT,
+    minutes INTEGER, 
+    calories INTEGER,
+    heart_rate INTEGER);
+
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 30, 100, 110);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 10, 30, 105);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("dancing", 15, 200, 120);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("tree climbing", 30, 70, 90);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("tree climbing", 25, 72, 80);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("rowing", 30, 70, 90);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("hiking", 60, 80, 85);
+
+SELECT * FROM exercise_logs WHERE type = "biking" OR type = "hiking" OR type = "tree climbing" OR type = "rowing";
+
+SELECT * FROM exercise_logs WHERE type IN ("biking", "hiking", "tree climbing", "rowing"); //shows units inside the options
+
+SELECT * FROM exercise_logs WHERE type NOTIN ("biking", "hiking", "tree climbing", "rowing");
+
+CREATE TABLE drs_favorites
+    (id INTEGER PRIMARY KEY,
+    type TEXT,
+    reason TEXT);
+
+INSERT INTO drs_favorites(type, reason) VALUES ("biking", "Improves endurance and flexibility.");
+INSERT INTO drs_favorites(type, reason) VALUES ("hiking", "Increases cardiovascular health.");
+
+SELECT type FROM drs_favorites;
+
+SELECT * FROM exercise_logs WHERE type IN (SELECT type FROM drs_favorites);
+
+SELECT * FROM exercise_logs WHERE type IN (SELECT type FROM drs_favorites WHERE reason = "Increases cardiovascular health");
+
+SELECT * FROM exercise_logs WHERE type IN (SELECT type FROM drs_favorites WHERE reason LIKE "%cardiovascular%");
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+100
+110
+2
+biking
+10
+30
+105
+4
+tree climbing
+30
+70
+90
+5
+tree climbing
+25
+72
+80
+6
+rowing
+30
+70
+90
+7
+hiking
+60
+80
+85
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+100
+110
+2
+biking
+10
+30
+105
+4
+tree climbing
+30
+70
+90
+5
+tree climbing
+25
+72
+80
+6
+rowing
+30
+70
+90
+7
+hiking
+60
+80
+85
+
+type
+biking
+hiking
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+100
+110
+2
+biking
+10
+30
+105
+7
+hiking
+60
+80
+85
+
+id
+type
+minutes
+calories
+heart_rate
+7
+hiking
+60
+80
+85
+
+CREATE TABLE artists (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    country TEXT,
+    genre TEXT);
+
+INSERT INTO artists (name, country, genre)
+    VALUES ("Taylor Swift", "US", "Pop");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Led Zeppelin", "US", "Hard rock");
+INSERT INTO artists (name, country, genre)
+    VALUES ("ABBA", "Sweden", "Disco");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Queen", "UK", "Rock");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Celine Dion", "Canada", "Pop");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Meatloaf", "US", "Hard rock");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Garth Brooks", "US", "Country");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Shania Twain", "Canada", "Country");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Rihanna", "US", "Pop");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Guns N' Roses", "US", "Hard rock");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Gloria Estefan", "US", "Pop");
+INSERT INTO artists (name, country, genre)
+    VALUES ("Bob Marley", "Jamaica", "Reggae");
+
+CREATE TABLE songs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    artist TEXT,
+    title TEXT);
+
+INSERT INTO songs (artist, title)
+    VALUES ("Taylor Swift", "Shake it off");
+INSERT INTO songs (artist, title)
+    VALUES ("Rihanna", "Stay");
+INSERT INTO songs (artist, title)
+    VALUES ("Celine Dion", "My heart will go on");
+INSERT INTO songs (artist, title)
+    VALUES ("Celine Dion", "A new day has come");
+INSERT INTO songs (artist, title)
+    VALUES ("Shania Twain", "Party for two");
+INSERT INTO songs (artist, title)
+    VALUES ("Gloria Estefan", "Conga");
+INSERT INTO songs (artist, title)
+    VALUES ("Led Zeppelin", "Stairway to heaven");
+INSERT INTO songs (artist, title)
+    VALUES ("ABBA", "Mamma mia");
+INSERT INTO songs (artist, title)
+    VALUES ("Queen", "Bicycle Race");
+INSERT INTO songs (artist, title)
+    VALUES ("Queen", "Bohemian Rhapsody");
+INSERT INTO songs (artist, title)
+    VALUES ("Guns N' Roses", "Don't cry");
+    
+SELECT title FROM songs WHERE artist = "Queen";
+
+SELECT name FROM artists WHERE genre = "Pop";
+
+SELECT title FROM songs WHERE artist IN (SELECT name FROM artists WHERE genre = "Pop");
+
+title
+Bicycle Race
+Bohemian Rhapsody
+
+name
+Taylor Swift
+Celine Dion
+Rihanna
+Gloria Estefan
+
+title
+Shake it off
+Stay
+My heart will go on
+A new day has come
+Conga
+
+CREATE TABLE exercise_logs
+    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT,
+    minutes INTEGER, 
+    calories INTEGER,
+    heart_rate INTEGER);
+
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 30, 100, 110);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 10, 30, 105);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("dancing", 15, 200, 120);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("dancing", 15, 165, 120);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("tree climbing", 30, 70, 90);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("tree climbing", 25, 72, 80);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("rowing", 30, 70, 90);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("hiking", 60, 80, 85);
+
+SELECT * FROM exercise_logs;
+
+SELECT type, SUM(calories) AS total_calories FROM exercise_logs GROUP BY type;
+
+SELECT type, SUM(calories) AS total_calories FROM exercise_logs GROUP BY type HAVING total_calories > 150;
+
+SELECT type, SUM(calories) AS total_calories FROM exercise_logs GROUP BY type HAVING total_calories > 70;
+
+SELECT type FROM exercise_logs GROUP BY type HAVING COUNT(*) >= 2;
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+115
+110
+2
+biking
+10
+45
+105
+3
+dancing
+15
+200
+120
+4
+dancing
+15
+165
+120
+5
+tree climbing
+30
+70
+90
+6
+tree climbing
+25
+72
+80
+7
+rowing
+30
+70
+90
+8
+hiking
+60
+80
+85
+
+type
+total_calories
+biking
+160
+dancing
+365
+hiking
+80
+rowing
+70
+tree climbing
+142
+
+type
+total_calories
+biking
+160
+dancing
+365
+
+type
+avg_calories
+biking
+80
+dancing
+182.5
+hiking
+80
+tree climbing
+71
+
+type
+biking
+dancing
+tree climbing
+
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    author TEXT,
+    title TEXT,
+    words INTEGER);
+    
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Philosopher's Stone", 79944);
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Chamber of Secrets", 85141);
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Prisoner of Azkaban", 107253);
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Goblet of Fire", 190637);
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Order of the Phoenix", 257045);
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Half-Blood Prince", 168923);
+INSERT INTO books (author, title, words)
+    VALUES ("J.K. Rowling", "Harry Potter and the Deathly Hallows", 197651);
+
+INSERT INTO books (author, title, words)
+    VALUES ("Stephenie Meyer", "Twilight", 118501);
+INSERT INTO books (author, title, words)
+    VALUES ("Stephenie Meyer", "New Moon", 132807);
+INSERT INTO books (author, title, words)
+    VALUES ("Stephenie Meyer", "Eclipse", 147930);
+INSERT INTO books (author, title, words)
+    VALUES ("Stephenie Meyer", "Breaking Dawn", 192196);
+    
+INSERT INTO books (author, title, words)
+    VALUES ("J.R.R. Tolkien", "The Hobbit", 95022);
+INSERT INTO books (author, title, words)
+    VALUES ("J.R.R. Tolkien", "Fellowship of the Ring", 177227);
+INSERT INTO books (author, title, words)
+    VALUES ("J.R.R. Tolkien", "Two Towers", 143436);
+INSERT INTO books (author, title, words)
+    VALUES ("J.R.R. Tolkien", "Return of the King", 134462);
+ 
+SELECT author, SUM(words) AS total_words FROM books GROUP BY author HAVING COUNT(*) > 1 AND SUM(words) > 1000000;
+
+SELECT author, AVG(words) AS avg_words FROM books GROUP BY author HAVING avg_words > 150000;
+
+author
+total_words
+J.K. Rowling
+1086594
+
+author
+avg_words
+J.K. Rowling
+155227.7142857143
+
+CREATE TABLE exercise_logs
+    (id INTEGER PRIMARY KEY AUTOINCREMENT,
+    type TEXT,
+    minutes INTEGER, 
+    calories INTEGER,
+    heart_rate INTEGER);
+
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 30, 100, 110);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("biking", 10, 30, 105);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("dancing", 15, 200, 120);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("dancing", 15, 165, 120);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("tree climbing", 30, 70, 90);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("tree climbing", 25, 72, 80);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("rowing", 30, 70, 90);
+INSERT INTO exercise_logs(type, minutes, calories, heart_rate) VALUES ("hiking", 60, 80, 85);
+
+SELECT * FROM exercise_logs;
+
+SELECT COUNT(*) FROM exercise_logs WHERE heart_rate > 220 - 30;
+
+//50-90% of max
+
+SELECT COUNT(*) FROM exercise_logs WHERE 
+ heart_rate >= ROUND(0.50 * (220-30)) 
+ AND heart_rate <= ROUND(0.90 * (220-30));
+
+//case
+SELECT type, heart_rate, 
+ CASE 
+  WHEN heart_rate > 220-30 THEN "above max"
+  WHEN heart_rate > ROUND(0.90 * (220-30)) THEN "above target"
+  WHEN heart_rate > ROUND(0.50 * (220-30)) THEN "within target"
+  ELSE "below target"
+ END as "hr_zone"
+FROM exercise_logs;
+
+SELECT COUNT(*),
+ CASE 
+  WHEN heart_rate > 220-30 THEN "above max"
+  WHEN heart_rate > ROUND(0.90 * (220-30)) THEN "above target"
+  WHEN heart_rate > ROUND(0.50 * (220-30)) THEN "within target"
+  ELSE "below target"
+ END as "hr_zone"
+FROM exercise_logs;
+GROUP BY hr_zone;
+
+id
+type
+minutes
+calories
+heart_rate
+1
+biking
+30
+100
+110
+2
+biking
+10
+30
+105
+3
+dancing
+15
+200
+120
+4
+dancing
+15
+165
+120
+5
+tree climbing
+30
+70
+90
+6
+tree climbing
+25
+72
+80
+7
+rowing
+30
+70
+90
+8
+hiking
+60
+80
+85
+
+COUNT(*)
+0
+
+COUNT(*)
+4
+
+type
+heart_rate
+hr_zone
+biking
+110
+within target
+biking
+105
+within target
+dancing
+120
+within target
+dancing
+120
+within target
+tree climbing
+90
+below target
+tree climbing
+80
+below target
+rowing
+90
+below target
+hiking
+85
+below target
+
+COUNT(*)
+hr_zone
+4
+below target
+4
+within target
+
+CREATE TABLE student_grades (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    number_grade INTEGER,
+    fraction_completed REAL);
+    
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winston", 90, 0.805);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winnefer", 95, 0.901);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winsteen", 85, 0.906);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Wincifer", 66, 0.7054);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winster", 76, 0.5013);
+INSERT INTO student_grades (name, number_grade, fraction_completed)
+    VALUES ("Winstonia", 82, 0.9045);
+    
+SELECT name, number_grade, ROUND(fraction_completed * 100) AS percent_completed FROM student_grades;
+
+SELECT name, number_grade, 
+    CASE
+        WHEN number_grade > 90 THEN "A"
+        WHEN number_grade > 80 THEN "B"
+        WHEN number_grade > 70 THEN "C"
+        ELSE "F"
+    END as "Letter Grades"
+FROM student_grades;
+
+SELECT COUNT(name) AS Number_of_students,
+    CASE
+        WHEN number_grade > 90 THEN "A"
+        WHEN number_grade > 80 THEN "B"
+        WHEN number_grade > 70 THEN "C"
+        ELSE "F"
+    END as "Student's grades"
+FROM student_grades
+GROUP BY "Student's grades";
+
+name
+number_grade
+percent_completed
+Winston
+90
+81
+Winnefer
+95
+90
+Winsteen
+85
+91
+Wincifer
+66
+71
+Winster
+76
+50
+Winstonia
+82
+90
+
+name
+number_grade
+Letter Grades
+Winston
+90
+B
+Winnefer
+95
+A
+Winsteen
+85
+B
+Wincifer
+66
+F
+Winster
+76
+C
+Winstonia
+82
+B
+
+Number_of_students
+Student's grades
+1
+A
+3
+B
+1
+C
+1
+F
+
+CREATE TABLE countries_by_population (
+    rank INTEGER PRIMARY KEY AUTOINCREMENT,
+    country TEXT,
+    population INTEGER,
+    percent_one_year_change NUMERIC,
+    population_change INTEGER,
+    net_migrants INTEGER,
+    median_age NUMERIC,
+    percent_aged_over_60 INTEGER,
+    fertility_rate NUMERIC,
+    area_sq_km INTEGER,
+    density_per_sq_km INTEGER,
+    urban_pop_percent INTEGER,
+    urban_pop INTEGER,
+    percent_of_world_pop NUMERIC
+);
+    
+INSERT INTO countries_by_population (country, population, percent_one_year_change, population_change, net_migrants, median_age, percent_aged_over_60, fertility_rate, area_sq_km, density_per_sq_km, urban_pop_percent, urban_pop, percent_of_world_pop) VALUES (
+    "China", 1393783836, 0.59, 8217299, -313996, 35.7, 14, 1.66, 9596947, 145, 54, 756300115, 19.24
+);
+//about 200 other instances similar to "China"
+
+SELECT AVG(population) AS Average_Population FROM countries_by_population;
+
+SELECT MAX(percent_one_year_change) AS Maximum_percent_change_over_a_year FROM countries_by_population;
+
+SELECT MIN(percent_aged_over_60) AS Smallest_percentage_of_people_aged_over_60 FROM countries_by_population;
+
+SELECT country AS Total_areas_above_5_million FROM countries_by_population GROUP BY area_sq_km HAVING area_sq_km > 5000000;
+
+SELECT AVG(median_age) AS median_age FROM countries_by_population;
+
+SELECT country, median_age,
+    CASE
+        WHEN median_age > 28.0659 AND median_age < 37.6 THEN "Quartile 1"
+        WHEN median_age < 28.0659 AND median_age > 18.5 THEN "Quartile -1"
+        ELSE "Other Quartile"
+    END as "quartiles"
+FROM countries_by_population;
+
+Average_Population
+69785627.08
+
+Maximum_percent_change_over_a_year
+3.95
+
+Smallest_percentage_of_people_aged_over_60
+1
+
+Total_areas_above_5_million
+Australia
+Brazil
+China
+U.S.A.
+Canada
+Russia
+
+median_age
+28.06599999999998
+
+country
+median_age
+quartiles
+China
+35.7
+Quartile 1
+India
+26.6
+Quartile -1
+U.S.A.
+37.5
+Quartile 1
+Indonesia
+28.1
+Quartile 1
+Brazil
+30.7
+Quartile 1
+Pakistan
+22.8
+Quartile -1
+Nigeria
+17.8
+Other Quartile
+Bangladesh
+25.4
+Quartile -1
+Russia
+38.4
+Other Quartile
+
+
+SELECT *
+FROM products
+ORDER BY Price DESC;
+
+ProductID
+ProductName
+SupplierID
+CategoryID
+Unit
+Price
+38
+Côte de Blaye
+18
+1
+12 - 75 cl bottles
+263.5
+29
+Thüringer Rostbratwurst
+12
+6
+50 bags x 30 sausgs.
+123.79
+9
+Mishi Kobe Niku
+4
+6
+18 - 500 g pkgs.
+97
+
+SELECT 
+    customerName,
+    COUNT(*) AS 'number of orders'
+FROM customers
+INNER JOIN orders
+	ON orders.customerID = customers.customerID
+GROUP BY customers.customerID;
+
+CustomerName
+number of orders
+Ana Trujillo Emparedados y helados
+1
+Antonio Moreno Taquería
+1
+Around the Horn
+2
+Mysql-ctl start, cli, stop
+Opens mysql terminal
+Help;
+Show databases;
+Select @@hostname;
+CREATE DATABASE ya_bish;
+DROP DATABASE ya_bish;
+USE dog_walking_app;
+Changes directory
+SELECT database();
+Shows current directly
+Numeric types
+INT
+SMALLINT
+TINYINT
+MEDIUMINT
+BIGINT
+DECIMAL
+NUMERIC
+FLOAT
+DOUBLE
+BIT
+String types
+CHAR
+VARCHAR
+BINARY
+VARBINARY
+BLOB
+TINYBLOB
+MEDIUMBLOB
+LONGBLOB
+TEXT
+TINYTEXT
+MEDIUMTEXT
+LONGTEXT
+ENUM
+Data types
+DATE
+DATETIME
+TIMESTAMP
+TIME
+YEAR
+int
+Whole #
+Max # of 2147m
+UNSIGNED
+0-4b max and min
+If you want to eliminate all negatives in a field
+Varchar
+Variable length
+1-255 characters
+varchar(100) //100 = max length
+
+CREATE TABLE tablename
+ (
+    column_name data_type,
+    column_name data_type
+ );
+CREATE TABLE cats
+ (
+    name VARCHAR(100),
+    age INT
+ );
+SHOW TABLES;
+SHOW COLUMNS FROM <tablename>;
+DESC cats;
+DROP TABLE <tablename>;
+INSERT INTO cats(name, age)
+VALUES ('Jetson', 7);
+SELECT * FROM cats;
+View data from any table
+INSERT INTO cats(name, age)
+VALUES ('Charlie', 10)
+	,('sadie', 3)
+	,('lazy bear', 1);
+‘This test has \’quotes\’ in it’
+
+CREATE TABLE people
+ (
+   first_name VARCHAR(20),
+   last_name VARCHAR(20),
+   age INT
+ );
+INSERT INTO people(first_name, last_name, age)
+VALUES ('Tina', 'Belcher', 13);
+INSERT INTO people(age, last_name, first_name)
+VALUES (42, 'Belcher', 'Bob');
+INSERT INTO people(first_name, last_name, age)
+VALUES('Linda', 'Belcher', 45)
+ ,('Phillip', 'Frond', 38)
+ ,('Calvin', 'Fischoeder', 70);
+SHOW WARNINGS;
+NULL = unknown
+
+CREATE TABLE cats2
+ (
+   name VARCHAR(100) NOT NULL,
+   age INT NOT NULL
+ );
+Default name specified and requirement of no NULLS
+CREATE TABLE cats3 (
+    -> name VARCHAR(20) DEFAULT 'no name provided',
+    -> age INT DEFAULT 99);
+
+CREATE TABLE cats4
+ (
+   name VARCHAR(20) NOT NULL DEFAULT 'unnamed',
+   age INT NOT NULL DEFAULT 99
+ );
+
+INSERT INTO cats4(name, age) VALUES('Cali', NULL);
+ERROR 1048 (23000): Column 'age' cannot be null
+
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(100) | NO   |     | unnamed |       |
+| age   | int(11)      | NO   |     | 99      |       |
++-------+--------------+------+-----+---------+-------+
+
+Primary Keys = unique ID
+CREATE TABLE unique_cats (cat_id INT NOT NULL
+	,name VARCHAR(100)
+	,age INT
+	,PRIMARY KEY (cat_id));
++--------+--------------+------+-----+---------+-------+
+| Field  | Type         | Null | Key | Default | Extra |
++--------+--------------+------+-----+---------+-------+
+| cat_id | int(11)      | NO   | PRI | NULL    |       |
+| name   | varchar(100) | YES  |     | NULL    |       |
+| age    | int(11)      | YES  |     | NULL    |       |
++--------+--------------+------+-----+---------+-------+
+INSERT INTO unique_cats(cat_id, name, age) VALUES (1, 'FRED', 23);  
+//Remove requirement to add 12345….
+//use if username cant be primary key
+CREATE TABLE unique_cats2 (cat_id INT NOT NULL AUTO_INCREMENT
+	,name VARCHAR(100)
+	,age INT
+	,PRIMARY KEY (cat_id));
+INSERT INTO unique_cats2(name, age) VALUES('Jiff', 3); //do this multiple times
++--------+--------+------+
+| cat_id | name   | age  |
++--------+--------+------+
+|      1 | Skippy |    4 |
+|      2 | Jiff   |    3 |
+|      3 | Jiff   |    3 |
+|      4 | Skippy |    4 |
++--------+--------+------+
+
+CREATE TABLE employees (
+    -> id INT NOT NULL AUTO_INCREMENT
+    -> ,first_name VARCHAR(100) NOT NULL
+    -> ,last_name VARCHAR(100) NOT NULL
+    -> ,middle_name VARCHAR(100)
+    -> ,age INT NOT NULL
+    -> ,current_status VARCHAR(100) NOT NULL DEFAULT 'employed'
+    -> ,PRIMARY KEY (id));
+
++----------------+--------------+------+-----+----------+----------------+
+| Field          | Type         | Null | Key | Default  | Extra          |
++----------------+--------------+------+-----+----------+----------------+
+| id             | int(11)      | NO   | PRI | NULL     | auto_increment |
+| first_name     | varchar(100) | NO   |     | NULL     |                |
+| last_name      | varchar(100) | NO   |     | NULL     |                |
+| middle_name    | varchar(100) | YES  |     | NULL     |                |
+| age            | int(11)      | NO   |     | NULL     |                |
+| current_status | varchar(100) | NO   |     | employed |                |
++----------------+--------------+------+-----+----------+----------------+
+
+INSERT INTO employees(first_name, last_name, age) VALUES
+    -> ('Dora', 'Smith', 58);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM employees;
++----+------------+-----------+-------------+-----+----------------+
+| id | first_name | last_name | middle_name | age | current_status |
++----+------------+-----------+-------------+-----+----------------+
+|  1 | Dora       | Smith     | NULL        |  58 | employed       |
+
+CREATE = INSERT INTO
+READ, UPDATE, DELETE
+CREATE TABLE cats (
+    cat_id INT NOT NULL AUTO_INCREMENT
+    ,name VARCHAR(100)
+    ,breed VARCHAR(100)
+    ,age INT
+    ,PRIMARY KEY (cat_id));
+    
+DESC cats; 
+
+INSERT INTO cats(name, breed, age) 
+VALUES ('Ringo', 'Tabby', 4),
+       ('Cindy', 'Maine Coon', 10),
+       ('Dumbledore', 'Maine Coon', 11),
+       ('Egg', 'Persian', 4),
+       ('Misty', 'Tabby', 13),
+       ('George Michael', 'Ragdoll', 9),
+       ('Jackson', 'Sphynx', 7);
+       
+SELECT cat_id, breed, age FROM cats;
+
+SELECT * FROM cats WHERE age=4;
+
+SELECT * FROM cats WHERE name = 'Egg'; #caps doesnt matter
+
+SELECT cat_id, age FROM cats WHERE cat_id = age;
+
+SELECT * FROM cats WHERE cat_id=age;
+
+SELECT name AS cat_name, breed AS cat_breed FROM cats; #changes column name
+
+UPDATE cats SET age=14 WHERE name='misty';
+
+UPDATE cats SET breed='Shorthair' WHERE breed='Tabby';
+
+DELETE FROM cats WHERE name='Egg';
+
+DELETE FROM cats; #deletes all cats
+
